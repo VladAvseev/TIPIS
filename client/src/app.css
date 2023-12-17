@@ -1,0 +1,44 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box
+	;
+}
+
+body {
+	background-color: #FFFFFF;
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+}
+
+.label {
+	width: 260px;
+	font-size: 20px;
+}
+
+.textField {
+	padding: 4px;
+	background-color: #FFEBCD;
+	border: 1px solid #D2B48C;
+	border-radius: 5px;
+}
+
+.info_icon {
+	margin: 0 8px;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: grey;
+	opacity: 0.5;
+	color: #FFFFFF;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.info_icon:hover {
+	opacity: 0.8;
+}
