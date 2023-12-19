@@ -42,14 +42,14 @@ def createModel():
 	return {"clf": clf, "score": score}
 
 class Data(BaseModel):
-  Pregnancies: int
-  Glucose: int
-  BloodPressure: int 
-  SkinThickness: int 
-  Insulin: int
-  BMI: int
-  DiabetesPedigreeFunction: int
-  Age: int 
+  Pregnancies: float
+  Glucose: float
+  BloodPressure: float
+  SkinThickness: float 
+  Insulin: float
+  BMI: float
+  DiabetesPedigreeFunction: float
+  Age: float
 
 app = FastAPI()
 
