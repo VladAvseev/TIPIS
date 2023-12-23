@@ -5,19 +5,6 @@ from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.metrics import accuracy_score
 from sklearn.linear_model import LogisticRegression
 from fastapi.middleware.cors import CORSMiddleware
- 
-# Код с помощью которого были подобраны наилучшие параметры
-def searchBestParams(X, y):
-	# заново создадим модель, указав солвер
-	clf = LogisticRegression(solver='saga')
-	# опишем сетку, по которой будем искать
-	param_grid = {
-			'C': [1, 2, 3, 4],
-			'penalty': ['l2'],
-	}
-	search = GridSearchCV(clf, param_grid, n_jobs=-1, cv=5, refit=True, scoring='accuracy')
-	search.fit(X, y)
-	return search.best_params_
 
 #Загрузим данные из датасета
 diabetes_df = pd.read_csv('./diabetes.csv', delimiter=',')
@@ -64,6 +51,6 @@ app.add_middleware(
 model = createModel()
 
 @app.post("/")
-async def create_item(data: Data):
+async def takeTest(data: Data):
     result = model.get('clf').predict([list(data.model_dump().values())])
     return {"result": int(result[0]), "score": float(model.get('score'))}
