@@ -71,7 +71,7 @@ const MForm = types.model('form', {
 		if (value < 0) {
 			self.DiabetesPedigreeFunction = 0;
 		} else if (value > 100) {
-			self.DiabetesPedigreeFunction = 100;
+			self.DiabetesPedigreeFunction = 1;
 		} else {
 			self.DiabetesPedigreeFunction = value / 100;
 		}
