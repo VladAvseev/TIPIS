@@ -1,10 +1,11 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 import pandas as pd
-from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 from sklearn.linear_model import LogisticRegression
 from fastapi.middleware.cors import CORSMiddleware
+from imblearn.over_sampling import SMOTE
 
 #Загрузим данные из датасета
 diabetes_df = pd.read_csv('./diabetes.csv', delimiter=',')
@@ -13,8 +14,13 @@ diabetes_df.columns = ['Pregnancies', 'Glucose', 'BloodPressure', 'SkinThickness
 # Подготовка данных
 X = diabetes_df.drop('Outcome', axis =1).values
 y = diabetes_df.Outcome.values
+
+# Синтез данных для балансировки датасета
+sm = SMOTE(random_state=42, k_neighbors=5)
+X_res, y_res = sm.fit_resample(X, y)
+
 # Разобъём данные на тренировочные и тестовые
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X_res, y_res, test_size=0.2, random_state=42)
 
 def createModel(): 
 	# создание модели с указанием гиперпараметра C
